@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         _canvasGroup = _sleepScreen.GetComponent<CanvasGroup>();
+        ActivateMultiDisplayMode();
+        Cursor.visible = false;
     }
     private void Update()
     {
@@ -68,5 +70,10 @@ public class GameManager : MonoBehaviour
             yield return new WaitForFixedUpdate();
             _coroutine = StartCoroutine(SetAlpha(alpha));
         }
+    }
+    private void ActivateMultiDisplayMode() {
+        if (Display.displays.Length > 1)
+            foreach( var display in Display.displays)
+                display.Activate();
     }
 }
